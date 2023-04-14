@@ -1,0 +1,64 @@
+(defcfg
+  ;; For Linux
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "My KMonad output")
+
+  ;; This option tells KMonad to let non-configured keys act normal
+  fallthrough true
+)
+
+(defsrc
+  esc  mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]        ret
+  caps a    s    d    f    g    h    j    k    l    ;    '     \
+  lsft 102d z    x    c    v    b    n    m    ,    .    /              rsft
+  wkup lctl lmet lalt           spc            ralt cmps rctl      back up   fwd
+)
+
+(defalias
+    sft_a (tap-hold-next-release 200 a lsft)
+    ctl_r (tap-hold-next-release 200 r lctl)
+    met_s (tap-hold-next-release 200 s lmet)
+    alt_t (tap-hold-next-release 200 t lalt)
+
+    alt_n (tap-hold-next-release 200 n lalt)
+    met_e (tap-hold-next-release 200 e rmet)
+    ctl_i (tap-hold-next-release 200 i rctl)
+    sft_o (tap-hold-next-release 200 o rsft)
+
+    nav (layer-toggle navlayer)
+    sym (layer-toggle symlayer)
+)
+
+
+(deflayer homerowmods
+  caps  mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
+  tab  q    w    f    p    b    j    l    u    y    ;    [     ]        ret
+  esc  @sft_a   @ctl_r   @met_s   @alt_t   g   m   @alt_n   @met_e   @ctl_i   @sft_o ' \
+  lsft z    x    c    d    v    102d    k    h    ,    .    /              rsft
+  wkup lctl lmet @nav           spc            @sym cmps rctl      back up   fwd
+)
+
+(deflayer navlayer
+    _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    1    2    3    4    5    6    7    8    9    0    _    _         _
+  _    lsft    lctl    lmet    lalt    _    left    down    up    right    _    _   _
+  _    _    _    _    _    _    _    _    _    _    _    _              _
+  _    _    _    _              _              _    _    _         _    _    _
+)
+
+(deflayer symlayer
+    _    _    _    _                             _    _    _    _    _    _    _
+       _    _    _    _    _    _    _    _    _    _    _    _         _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    !    @    #    $    %    ^    &    *    \(    \)    _    _         _
+  _    lsft    lctl    lmet    lalt    "    -    =    [    ]    \    _    _
+  _    _    _    `    ~    '    \_    +    {    }    |    _              _
+  _    _    _    _              bspc              _    _    _         _    _    _
+)
