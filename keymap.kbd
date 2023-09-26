@@ -30,16 +30,21 @@
 
     nav (layer-toggle navlayer)
     sym (layer-toggle symlayer)
+
+    qwer (layer-switch qwerty)
+    hrml (layer-switch homerowmods)
+
+    mc3 #(S-; S-0)
 )
 
 
 (deflayer homerowmods
-  caps  mute vold volu                          prnt slck pause ins del  home pgup
+  @mc3  mute vold volu                          prnt slck pause ins del  home pgup
        f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
   grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
   tab  q    w    f    p    b    j    l    u    y    ;    [     ]        ret
   esc  @sft_a   @ctl_r   @met_s   @alt_t   g   m   @alt_n   @met_e   @ctl_i   @sft_o ' \
-  lsft z    x    c    d    v    102d    k    h    ,    .    /              rsft
+  caps z    x    c    d    v    102d    k    h    ,    .    /              @qwer
   wkup lctl lmet @nav           spc            @sym cmps rctl      back up   fwd
 )
 
@@ -48,8 +53,8 @@
        _    _    _    _    _    _    _    _    _    _    _    _         _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
   _    1    2    3    4    5    6    7    8    9    0    _    _         _
-  esc    lsft    lctl    lmet    lalt    _    left    down    up    right    _    ret   _
-  _    _    _    _    _    _    _    _    _    _    _    _              _
+  esc  lsft lctl lmet lalt _    left down up   right esc _    _
+  _    tab  caps _    _    _    _    _    _    _    ret  ret    _
   _    _    _    _              bspc              _    _    _         _    _    _
 )
 
@@ -57,9 +62,18 @@
     _    _    _    _                             _    _    _    _    _    _    _
        _    _    _    _    _    _    _    _    _    _    _    _         _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _         _
-  _    !    @    #    $    %    ^    &     *    \(    \)    _    _         _
-  _    lsft    lctl    lmet    lalt  \"    -    =    [    ]    \    _    _
-  _    _    `    ~    '    _    \_   +    {    }    |    _
+  _    !    @    #    $    %    ^    &    *    \(    \)  _    _         _
+  _    lsft lctl lmet lalt _    -    =    [    ]    \    _    _
+  _    _    _    `    ~    '    _    -   +    {    }    |        _
   _    _    _    _              bspc              _    _    _         _    _    _
 )
 
+(deflayer qwerty
+  esc  mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]        ret
+  @hrml a    s    d    f    g    h    j    k    l    ;    '     \
+  lsft 102d z    x    c    v    b    n    m    ,    .    /              rsft
+  wkup lctl lmet lalt           spc            ralt cmps rctl      back up   fwd
+)
